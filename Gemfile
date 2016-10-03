@@ -18,3 +18,6 @@ group :test do
   gem 'webmock'
   gem 'database_cleaner'
 end
+
+gem 'carrierwave'
+gem 'carrierwave-base64'
