@@ -17,7 +17,7 @@ FactoryGirl.define do
     description 'The Rails Tutorial is great!'
     released_on '2013-05-09'
     publisher_id nil
-    association :author, factory: :michael_hart
+    association :author, factory: :michael_hartl
   end
   factory :agile_web_development, class: Book do
     title 'Agile Web Development with Rails 4'
@@ -27,6 +27,6 @@ FactoryGirl.define do
     description 'Stay agile!'
     released_on '2015-10-11'
     publisher
-    association :author, :sam_ruby
+    association :author, factory: :sam_ruby
   end
 end
