@@ -19,4 +19,12 @@ class ApplicationController < ActionController::API
   def current_url
     request.base_url + request.path
   end
+
+  def sort(scope)
+    Sorter.new(scope, params).sort
+  end
+
+  def filter(scope)
+    Filter.new(scope, params.to_unsafe_hash).filter
+  end
 end
