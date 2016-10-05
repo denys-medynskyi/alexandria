@@ -21,3 +21,4 @@ end
 
 gem 'carrierwave'
 gem 'carrierwave-base64'
+gem 'kaminari'
