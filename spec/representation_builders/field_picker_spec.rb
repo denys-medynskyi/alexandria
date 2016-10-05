@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'FieldPicker' do
+RSpec.describe FieldPicker do
 # We define 'let' in cascade where each one of them is used by the # one below. This allows us to override any of them easily in a
 # specific context.
   let(:rails_tutorial) { create(:ruby_on_rails_tutorial) }
@@ -37,7 +37,8 @@ RSpec.describe 'FieldPicker' do
                                                })
         end
 # Let's not forget to remove the method once we're done to
-# avoid any problem with other tests. Always clean up after your tests! after { presenter.class.send(:remove_method, :title) }
+# avoid any problem with other tests. Always clean up after your tests!
+      after { presenter.class.send(:remove_method, :title) }
       end
     end
     context 'with no "fields" parameter' do

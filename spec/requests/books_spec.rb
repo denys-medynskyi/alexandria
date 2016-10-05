@@ -13,6 +13,18 @@ RSpec.describe 'Books', type: :request do
       books
     end
 
+    context 'when fields are passed' do
+      before do
+        get '/api/books?fields=id,title,author_id'
+      end
+
+      it 'gets books with only the id, title and author_id keys' do
+        json_body['data'].each do |book|
+          expect(book.keys).to eq ['id', 'title', 'author_id']
+        end
+      end
+    end
+
     context 'default behaviour' do
       before do
         get '/api/books'
@@ -25,6 +37,12 @@ RSpec.describe 'Books', type: :request do
       it { expect(json_body['data']).to_not be_nil }
 
       it { expect(json_body['data'].size).to eq(3) }
+
+      it 'gets books all keys' do
+        json_body['data'].each do |book|
+          expect(book.keys).to eq BookPresenter.build_attributes.map(&:to_s)
+        end
+      end
     end
   end
 end
