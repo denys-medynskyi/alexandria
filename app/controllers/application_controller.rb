@@ -27,4 +27,16 @@ class ApplicationController < ActionController::API
   def filter(scope)
     Filter.new(scope, params.to_unsafe_hash).filter
   end
+
+  def eager_load(scope)
+    EagerLoader.new(scope, params).load
+  end
+
+  def orchestrate_query(scope, actions = :all)
+    QueryOrchestrator.new(scope: scope,
+                          params: params,
+                          request: request,
+                          response: response,
+                          actions: actions).run
+  end
 end

@@ -13,24 +13,23 @@ RSpec.describe 'Books', type: :request do
       books
     end
 
+    context "with the 'embed' parameter" do
+      before { get '/api/books?embed=author' }
+      it 'gets the books with their authors embedded' do
+        json_body['data'].each do |book|
+          expect(book['author'].keys).to eq(
+                                             ['id', 'given_name', 'family_name', 'created_at', 'updated_at']
+                                         )
+        end
+      end
+    end
+
     describe 'sorting' do
       context 'with valid column name "id"' do
         it 'sorts the books by "id desc"' do
           get('/api/books?sort=id&dir=desc')
           expect(json_body['data'].first['id']).to eq agile_web_dev.id
           expect(json_body['data'].last['id']).to eq ruby_microscope.id
-        end end
-      context 'with invalid column name "fid"' do
-        it 'gets "400 Bad Request" back' do
-          get '/api/books?sort=fid&dir=asc'
-          expect(response.status).to eq 400
-        end
-
-        it 'receives an error' do
-          expect(json_body['error']).to_not be nil
-        end
-        it 'receives "sort=fid" as an invalid param' do
-          expect(json_body['error']['invalid_params']).to eq 'sort=fid'
         end
       end
     end

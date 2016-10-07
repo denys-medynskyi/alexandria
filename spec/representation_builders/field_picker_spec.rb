@@ -54,5 +54,13 @@ RSpec.describe FieldPicker do
                                                     })
       end
     end
+
+    context 'with invalid attributes "fid"' do
+      let(:params) { { fields: 'fid,title' } }
+      it 'raises a "RepresentationBuilderError"' do
+        expect { field_picker.pick }.to(
+            raise_error(RepresentationBuilderError))
+      end
+    end
   end
 end
