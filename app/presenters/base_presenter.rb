@@ -37,4 +37,9 @@ class BasePresenter
   def embeds
     EmbedPicker.new(self).embed
   end
+
+  def build(actions)
+    actions.each { |action| send(action) }
+    self
+  end
 end
