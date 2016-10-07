@@ -16,6 +16,7 @@ class QueryOrchestrator
       end
       @scope = send(action)
     end
+    @scope
   end
 
   private
