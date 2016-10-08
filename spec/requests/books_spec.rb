@@ -7,6 +7,13 @@ RSpec.describe 'Books', type: :request do
 
   let(:books) { [ruby_microscope, rails_tutorial, agile_web_dev] }
 
+  before do
+    allow_any_instance_of(BooksController).to(
+        receive(:validate_auth_scheme).and_return(true))
+    allow_any_instance_of(BooksController).to(
+        receive(:authenticate_client).and_return(true))
+  end
+
   describe 'GET /api/books' do
 
     before do

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Authentication
+
   rescue_from QueryBuilderError, with: :handling_method
   rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
   protected
