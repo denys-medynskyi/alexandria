@@ -1,7 +1,9 @@
-class BooksController < ApplicationController
+class AuthorsController < ApplicationController
+  before_action :authorize_actions
+  before_action :authenticate_user, only: [:create, :update, :destroy]
   def index
-    books = orchestrate_query(Author.all)
-    render serialize(books)
+    authors = orchestrate_query(Author.all)
+    render serialize(authors)
   end
 
   def show
@@ -17,7 +19,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    if author.update(book_params)
+    if author.update(author_params)
       render serialize(author).merge(status: :ok)
     else
       unprocessable_entity!(author)

@@ -23,6 +23,7 @@ end
 gem 'carrierwave'
 gem 'carrierwave-base64'
 gem 'kaminari'
+gem 'pundit'
 
 gem 'pry-rails'
 gem 'bcrypt', '~> 3.1.7'

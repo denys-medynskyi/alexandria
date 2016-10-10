@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include Authentication
+  include Authorization
 
   rescue_from QueryBuilderError, with: :handling_method
   rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
@@ -21,11 +22,13 @@ class ApplicationController < ActionController::API
                           actions: actions).run
   end
 
-  def serialize(data)
+  def serialize(data, options = {})
     {
         json: Alexandria::Serializer.new(data: data,
                                          params: params,
-                                         actions: [:fields, :embeds]).to_json
+                                         actions: [:fields, :embeds],
+                                         options: options
+        ).to_json
     }
   end
 
