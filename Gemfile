@@ -25,3 +25,4 @@ gem 'carrierwave-base64'
 gem 'kaminari'
 
 gem 'pry-rails'
+gem 'bcrypt', '~> 3.1.7'
