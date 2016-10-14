@@ -8,6 +8,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'vcr'
 end
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -27,3 +28,5 @@ gem 'pundit'
 
 gem 'pry-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'money-rails'
+gem 'stripe'
