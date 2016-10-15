@@ -1,17 +1,21 @@
-require 'rails_helper'
-describe BookPolicy do
-  subject { described_class }
-  permissions :index?, :show? do
-    it 'grants access' do
-      expect(subject).to permit(nil, Book.new)
-    end
+class BookPolicy < ApplicationPolicy
+  def index?
+    true
   end
-  permissions :create?, :update?, :destroy? do
-    it 'denies access if user is not admin' do
-      expect(subject).not_to permit(build(:user), Book.new)
-    end
-    it 'grants access if user is admin' do
-      expect(subject).to permit(build(:admin), Book.new)
-    end
+
+  def show?
+    true
+  end
+
+  def create?
+    user.admin?
+  end
+
+  def update?
+    user.admin?
+  end
+
+  def destroy?
+    user.admin?
   end
 end

@@ -17,6 +17,14 @@ class BasePresenter
         instance_variable_set("@#{v}", args.map(&:to_s))
       end
     end
+
+    def cached
+      @cached = true
+    end
+
+    def cached?
+      @cached
+    end
   end
 
   attr_accessor :object, :params, :data
@@ -33,11 +41,19 @@ class BasePresenter
   end
 
   def fields
-    FieldPicker.new(self).pick
+    field_picker.pick
   end
 
   def embeds
-    EmbedPicker.new(self).embed
+    embed_picker.embed
+  end
+
+  def validated_fields
+    @fields_params ||= field_picker.fields.sort.join(',')
+  end
+
+  def validated_embeds
+    @embed_params ||= embed_picker.embeds.sort.join(',')
   end
 
   def build(actions)
@@ -46,4 +62,14 @@ class BasePresenter
     end
     self
   end
+
+
+  private
+  def field_picker
+    @field_picker ||= FieldPicker.new(self)
+  end
+  def embed_picker
+    @embed_picker ||= EmbedPicker.new(self)
+  end
+
 end
